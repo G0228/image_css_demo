@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html {
+      font-family: sans-serif;
+      line-height: 1.15;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      -ms-overflow-style: scrollbar;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      --antd-wave-shadow-color: #1890ff;
+    }
+    body {
+      text-transform: none;
+      line-height: 1.28581;
+      letter-spacing: 0;
+      font-weight: 400;
+      color: #182026;
+      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,Icons16,sans-serif;
+      margin: 0;
+      color: rgba(0,0,0,.65);
+      font-size: 14px;
+      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+      font-variant: tabular-nums;
+      line-height: 1.5;
+      background-color: #fff;
+      -webkit-font-feature-settings: "tnum";
+      font-feature-settings: "tnum","tnum";
+      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 1700px;
+      height: 100%;
+    }
+    .stacked {
+      display: grid;
+    }
+    .stacked-1, .stacked-2 {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .cards-container {
+      display: grid;
+      grid-template-columns: 150px 150px 150px 150px;
+      grid-gap: 25px;
+    }
+    *, :after, :before {
+      box-sizing: border-box;
+    }
+    .girl {
+      cursor: pointer;
+    }
+    .ant-steps {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      color: rgba(0,0,0,.65);
+      font-size: 14px;
+      font-variant: tabular-nums;
+      line-height: 1.5;
+      list-style: none;
+      font-feature-settings: "tnum","tnum";
+      display: -ms-flexbox;
+      display: flex;
+      width: 100%;
+      font-size: 0;
+      height: 84px;
+    }
+    .steps {
+      margin: 50px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="ant-steps steps"></div>
+  <div class="container">
+    <div class="stacked">
+      <div class="cards-container stacked-2 cross-fade-enter-done">
+        <div class="girl">
+          <div class="" style="border-radius: 5px; transform-style: preserve-3d; transform: perspective(450px); width: 150px; height: 150px;">
+            <div style="position: relative; width: 100%; height: 100%; border-radius: 5px; transition: all 0.2s ease-out 0s;">
+              <div style="position: absolute; top: 5%; left: 5%; width: 90%; height: 90%; transition: all 0.2s ease-out 0s; box-shadow: rgba(14, 21, 47, 0.6) 0px 8px 30px;"></div>
+              <div style="position: relative; width: 100%; height: 100%; border-radius: 5px; overflow: hidden; transform-style: preserve-3d;">
+                <div style="background-image: url(./下载.png); position: absolute; width: 104%; height: 104%; top: -2%; left: -2%; background-repeat: no-repeat; background-position: center center; background-color: transparent; background-size: cover; transition: all 0.1s ease-out 0s;"></div>
+              </div>
+              <div style="position: absolute; inset: 0px; border-radius: 5px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 60%);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var divO = document.querySelector('.girl');
+    var div1 = document.querySelector('.girl > div > div');
+    var div2 = document.querySelector('.girl > div > div > div');
+    var div3 = document.querySelector('.girl > div > div > div:nth-of-type(2) > div');
+    var div4 = document.querySelector('.girl > div > div > div:nth-of-type(3)');
+
+    const bodyScrollTop = document.body.scrollTop || document.getElementsByTagName("html")[0].scrollTop;
+    const bodyScrollLeft = document.body.scrollLeft;
+
+    const rootElemWidth = divO.clientWidth || divO.offsetWidth || divO.scrollWidth;
+    const rootElemHeight = divO.clientHeight || divO.offsetHeight || divO.scrollHeight;
+
+    const wMultiple = 640 / rootElemWidth;
+    const layerCount = 1;
+
+    var divOffsetLeft = divO.offsetLeft;
+    var divOffsetTop = divO.offsetTop;
+    
+    div1.addEventListener('mouseenter', function(e) {
+      div2.style.boxShadow = 'rgba(14, 21, 47, 0.4) 0px 45px 100px, rgba(14, 21, 47, 0.4) 0px 16px 40px'
+      div3.style.transform = 'translateX(0px) translateY(0px)'
+    })
+    div1.addEventListener('mousemove', function(e) {
+      var offsetX = 0.52 -  (e.pageX - divOffsetLeft - bodyScrollLeft) / rootElemWidth;
+      var offsetY = 0.52 -  (e.pageY - divOffsetTop - bodyScrollTop) / rootElemHeight;
+
+      var dx = e.pageX - divOffsetLeft - bodyScrollLeft - rootElemWidth / 2;
+      var dy = e.pageY - divOffsetTop - bodyScrollTop - rootElemHeight / 2;
+
+      var xRotate = (dy - offsetY) * (0.1 * wMultiple) / 3;
+      var yRotate = (offsetX - dx) * (0.07 * wMultiple) / 3;
+
+      var arad = Math.atan2(dy, dx);
+
+      var rawAngle = (arad * 180) / Math.PI - 90;
+      var angle = rawAngle < 0 ? rawAngle + 360 : rawAngle;
+
+      div1.style.transform = 'rotateX(' + xRotate + 'deg) rotateY(' + yRotate + 'deg) scale3d(1.07, 1.07, 1.07)'
+
+      div4.style.background = 'linear-gradient(' + angle + 'deg, rgba(255, 255, 255, ' + ((e.pageY - divOffsetTop - bodyScrollTop) / rootElemHeight) * 0.4 + ') 0%, rgba(255, 255, 255, 0) 80%)'
+      
+      div4.style.transform = `translateX(${offsetX * layerCount - 0.1}px) translateY(${offsetY * layerCount - 0.1})`
+    })
+    div1.addEventListener('mouseleave', function(e) {
+      div1.style.transform = null;
+      div2.style.boxShadow = 'rgba(14, 21, 47, 0.6) 0px 8px 30px'
+      div3.style.transform = null
+      div4.style.background = 'linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 60%)'
+      div4.style.transform = null
+    })
+  </script>
+</body>
+</html>
